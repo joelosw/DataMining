@@ -9,4 +9,4 @@ Mainly meant for my personal learning, but feel free to commin any comments or s
 **To be implemented**
 
 * Apriori Algorithm - to ind strong Associations
-* Decision Tree Creation
+* Decision Tree Creation - self explaining
