@@ -10,6 +10,3 @@ Mainly meant for my personal learning, but feel free to commin any comments or s
 
 * Apriori Algorithm - to ind strong Associations
 * Decision Tree Creation - self explaining
-
-
-**This line has been added in VS Code...**
