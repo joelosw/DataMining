@@ -8,5 +8,5 @@ Mainly meant for my personal learning, but feel free to commin any comments or s
 
 **To be implemented**
 
-* Apriori Algorithm - to ind strong Associations
+* Apriori Algorithm - to identify strong Associations
 * Decision Tree Creation - self explaining
