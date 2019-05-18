@@ -23,7 +23,7 @@ def chimerge(data, stop=6, split_on = 0):
     for a in range(len(values)-1):
         chis.append(chisquared(values[a], values[a+1]))
 
-   # minimum_index = np.argwhere(chis == min(chis))
+    minimum_index = np.argwhere(chis == min(chis))
     
 
     
