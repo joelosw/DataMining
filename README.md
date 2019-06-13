@@ -5,6 +5,7 @@ Mainly meant for my personal learning, but feel free to commin any comments or s
 
 **Implemented:**
 * ChiMerge - Discreticing Data Tuples based on Chi-Squared Tests ( Not completly finished yet...)
+            Currently only supporting one merge at eacht iteration (even if there are multiple minimum Chi2-values)
 
 **To be implemented**
 

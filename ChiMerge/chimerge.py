@@ -23,11 +23,41 @@ def chimerge(data, stop=6, split_on = 0):
     for a in range(len(values)-1):
         chis.append(chisquared(values[a], values[a+1]))
 
-    minimum_index = np.argwhere(chis == min(chis))
-    
+    while (len(sortiert) > stop):
+        
+        values = list(sortiert.values())
+        chis = []
 
+        for a in range(len(values)-1):
+            chis.append(chisquared(values[a], values[a+1]))
+        print(chis)
+        sortiert = merge(sortiert, chis)
+        
+
+    return(split_points(sortiert))
+
+def merge(sortiert, chis):
+    min_ind = np.argmin(chis)
+    lower = list(sortiert.keys())[min_ind]
+    upper= list(sortiert.keys())[min_ind+1]
+    temp=sortiert[upper]
+    np.add(temp[1], sortiert[lower])
+    sortiert[upper] = temp
+    del sortiert[lower]
+    print(sortiert)
+    return sortiert
+
+
+
+def split_points(merged_list):
+    points=list()
+    points.append(0.0)
     
-    print(chis)
+    for a in list(merged_list.keys()):
+        points.append(a) 
+
+    print('Points: ', points)
+    return points
 
 
 def counted(liste, split_on):
@@ -52,7 +82,7 @@ def chisquared(data1, data2):
     rand_h = [sum(data) for data in [data1, data2]]
     rand_v = [sum([data1[a], data2[a]]) for a in range(3)]
 
-    print('Summe horizontal: ',rand_h,' Summe vertical: ',  rand_v)
+    #print('Summe horizontal: ',rand_h,' Summe vertical: ',  rand_v)
     n=len(data1) + len(data2)
 
     data12= [data1, data2]
@@ -72,5 +102,10 @@ def chisquared(data1, data2):
     
     return chi2
 
-print(chimerge(daten))
+
+points = chimerge(daten)
+print('Die optimalen diskreten Intervalle lauten: ')
+for i in range(len(points)-1):
+    print ('\n  {} < x <= {}'.format(points[i], points[i+1]))
+ 
 
