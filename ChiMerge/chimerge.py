@@ -1,7 +1,7 @@
 import pandas as pd 
 import math
 import numpy as np
-iris=pd.read_csv("C:/Users/joelo/OneDrive/_UNI/DataMining/Code/iris.data", names=None)
+iris=pd.read_csv("./iris.data", names=None)
 iris.columns=['s_length', 's_width', 'p_length', 'p_width', 'type']
 iris.type=iris.type.replace({'Iris-setosa':0, 'Iris-versicolor':1, 'Iris-virginica':2})
 daten=iris.values.tolist()
@@ -37,9 +37,9 @@ def counted(liste, split_on):
         if length not in counted_dict.keys():
             #print('In If, hinzugefügt: ', length )
             counted_dict[length] = [0,0,0]
-            print(counted_dict)
+           
         counted_dict[length] [int(datapoint[4])] += 1 #at the according place in the dictionary increse the appropriate count (assuming that the class-number is the last one in the datapoint))
-
+    print(counted_dict)
     return counted_dict
 
 def chisquared(data1, data2):
@@ -52,7 +52,7 @@ def chisquared(data1, data2):
     rand_h = [sum(data) for data in [data1, data2]]
     rand_v = [sum([data1[a], data2[a]]) for a in range(3)]
 
-    print(rand_h, rand_v)
+    print('Summe horizontal: ',rand_h,' Summe vertical: ',  rand_v)
     n=len(data1) + len(data2)
 
     data12= [data1, data2]
