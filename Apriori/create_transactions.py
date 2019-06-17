@@ -8,5 +8,5 @@ def create_transactions(length, max_item, max_size_of_itemset):
         tran.append([random.randint(1, max_item) for a in range(random.randint(1,max_size_of_itemset))])
 
         transactions.append(tran)
-    print('Test Transactions: ', transactions)
+    print('Test Transactions created')
     return transactions
