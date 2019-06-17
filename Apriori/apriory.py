@@ -33,7 +33,7 @@ def apriori (transactions, min_trashhold, max_iterations):
         f.append({k:v for k,v in c[iteration].items() if v >= min_trashhold})
         iteration +=1
 
-        print (f'aktuelle Frequent {iteration}-Itemsets: ', f[iteration-1])
+        print (f'aktuelle Frequent {iteration-1}-Itemsets: ', f[iteration-1])
 
     print(f'Finales f  (Größtes Frequent Itemset: {iteration-2}): ', f[iteration-2])
 

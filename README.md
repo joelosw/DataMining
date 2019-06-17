@@ -9,5 +9,5 @@ Mainly meant for my personal learning, but feel free to commin any comments or s
 
 **To be implemented**
 
-* Apriori Algorithm - to identify strong Associations - started
+* Apriori Algorithm - to identify strong Associations - started, pruning seems to destroy some frequent itemsets!
 * Decision Tree Creation - self explaining
