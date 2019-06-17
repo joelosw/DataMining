@@ -3,6 +3,7 @@
 #from powerset import potenzmenge
 from itertools import combinations, product
 from create_transactions import create_transactions
+import timeit
 
 def apriori (transactions, min_trashhold, max_iterations):
     itemsets = [a[1] for a in transactions]
@@ -17,19 +18,24 @@ def apriori (transactions, min_trashhold, max_iterations):
   
     combinations2 = inner_join(f[1], 1)
     #print('zweiwertige Kombinationen: ', combinations2)
-    counted2 = count_items2(itemsets, combinations2,2)
+    counted2 = count_items2(itemsets, combinations2)
     c.append(counted2)
     f.append({k:v for k,v in c[2].items() if v >= min_trashhold})
 
     print('F nach Runde 2: ', f)
     iteration = 3
-    while iteration <= max_iterations:
+    #while iteration <= max_iterations:
+    while c[iteration-1]: 
         combinationX = inner_join(f[iteration-1], iteration-1)
-        c.append(count_items2(itemsets, combinationX, 250))
+        c.append(count_items2(itemsets, combinationX))
+        #not_counted_candidates = pruning(combinationX, f[len(f)-1].values(), iteration)
+        #c.append(count_items2(itemsets, not_counted_candidates))
         f.append({k:v for k,v in c[iteration].items() if v >= min_trashhold})
         iteration +=1
 
-    print('Finales f: ', f[max_iterations])
+        print (f'aktuelle Frequent {iteration-1}-Itemsets: ', f[iteration-1])
+
+    print(f'Finales f  (Größtes Frequent Itemset: {iteration-2}): ', f[iteration-2])
 
 def count_items(itemsets, size):
     counted = dict()
@@ -42,8 +48,8 @@ def count_items(itemsets, size):
                  counted[(item)] += 1
     return counted
 
-def count_items2(itemsets, to_count, size):
-    print('IM zählen (2), to count: ', to_count)
+def count_items2(itemsets, to_count):
+    #print('IM zählen (2), to count: ', to_count)
     #itemsets = [set(a) for a in itemsets]
     #to_count = [set(b) for b in to_count]
     counted = dict()
@@ -58,7 +64,19 @@ def count_items2(itemsets, to_count, size):
         
     return {tuple(k):v for k,v in counted.items() }
 
+
+def pruning(combinationX, l_minus_1, current_size):
+    for candidate in combinationX:
+        for sub_candidates in combinations(candidate, current_size-1):
+            if sub_candidates not in l_minus_1:
+                combinationX.remove(candidate)
+                print('pruned: ', candidate, ' because of: ', sub_candidates )
+                break
+
+    return combinationX
+
 def inner_join(counted, current_size):
+
     c=[]
     for freq_itemset in combinations(counted.keys(),2):
        # print('Häufige Tupel, in Kombination miteinander: ', freq_itemset)
@@ -68,12 +86,14 @@ def inner_join(counted, current_size):
             s.add(freq_itemset[1][current_size-1])
             c.append(tuple(s))
     
-    print('Übereinstimmende Itemsets: ', c)
+    #print('Übereinstimmende Itemsets: ', c)
     return c
-
-
 if __name__ == '__main__':
     #apriori([[[1], [1,2,3,4,5]], [[2],[2,3,4,5,6,7,8]], [[3], [7,8,9,10]]], 2,1000)
-    apriori(create_transactions(2500,17,12),3, 7)
+    start = timeit.default_timer()
+    apriori(create_transactions(1500,15,8),3, 8)
+    stop= timeit.default_timer()
+    print('Time: ', stop - start)
+
 
   
