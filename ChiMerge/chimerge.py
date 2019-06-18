@@ -8,11 +8,19 @@ daten=iris.values.tolist()
 
 
 def chimerge(data, stop=6, split_on = 0):
+    ''' 
+    The hear function of the Algorithm. This one takes it all together. 
+    It sorts the data and then transforms the list to  a dictionary, where each distinct attribute-value is a key. 
+    The according value is a class distribution of this key. 
+    It then calculates all chis for each two adjacents dictonary-values.
+    The Pair with the least chi-squared value get's merged, by removing the lower value and adding the class distribution to the higher value.
+
+        '''
     data.sort(key = lambda datapoint:datapoint[split_on] )
     liste = [[a] for a in data] # Each Data Point as one Interval 
     #print(liste)
     
-    print('Übergibt: ' , liste[0], ' und ', liste[1])
+    print('Übergibt: ' , liste[0],' und ', liste[1])
     
     #while (max([len(a) for a in list])<=stop):
     #    chissquared(to_be_filled_in)
@@ -37,6 +45,9 @@ def chimerge(data, stop=6, split_on = 0):
     return(split_points(sortiert))
 
 def merge(sortiert, chis):
+    ''' Given a dictionary of values with class distribution and a list of chi values, this function merges
+    the two adjancent intervalls with the least chi-squared value by removing the lower value and adding the class distribution to the upper one
+    '''
     min_ind = np.argmin(chis)
     lower = list(sortiert.keys())[min_ind]
     upper= list(sortiert.keys())[min_ind+1]
@@ -50,6 +61,8 @@ def merge(sortiert, chis):
 
 
 def split_points(merged_list):
+    ''' This method simply creates a list of splitpoints based on the given dictionary of attribute-values'''
+
     points=list()
     points.append(0.0)
     
@@ -61,6 +74,9 @@ def split_points(merged_list):
 
 
 def counted(liste, split_on):
+    ''' This method gets a list of attribute-values and the attribute of interest. 
+    It then counts how often the attribute-value occurs for each class. This is returned as a dictionary, with the value as key and 
+    the class distribution as dict-value'''
     counted_dict = dict()
     for datapoint in liste:
         length = datapoint[split_on]
@@ -73,6 +89,7 @@ def counted(liste, split_on):
     return counted_dict
 
 def chisquared(data1, data2):
+    ''' This function calculates the chi-squared value of two given class distributions'''
    # data1 = [sum([1 if datapoint[4]==iris_class else 0 for datapoint in data1]) for iris_class in range(3)]
 
    # data2 = [sum([1 if datapoint[4]==iris_class else 0 for datapoint in data2]) for iris_class in range(3)]
