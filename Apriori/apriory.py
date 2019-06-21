@@ -6,6 +6,16 @@ from create_transactions import create_transactions
 import timeit
 
 def apriori (transactions, min_trashhold, max_iterations):
+    ''' The hear function of the Algorithm. This one takes it all together. 
+    It sorts and count the Data. 
+    It does the first two iterations manually
+    and all the other ones in a loop. 
+    These allways includes:
+        1. Join Operation to form new candidates based on Last Tupels
+        2. Prune Cadidates with apriori knowledge
+        3. Count candidates
+        4. Keep those candidates as frequent itemsets, whose support >= threshhold '''
+        
     itemsets = [a[1] for a in transactions]
     c=[0]
     print(max(max(itemsets)))
