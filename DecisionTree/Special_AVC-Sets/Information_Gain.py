@@ -7,7 +7,7 @@ def entropy(class_label_count_list):
     if 0 in class_label_count_list:
         return 0
     info= - sum([p/total_count * math.log2(p /total_count) for p in class_label_count_list]) 
-    print('Needed Expected Bits: ', info )
+    # print('Needed Expected Bits: ', info )
     return info 
 
 def info_a(dataframe):
