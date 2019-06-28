@@ -40,9 +40,6 @@ def info_a(dataframe):
     return info_a
 
 
-     
-
-
 def info_a_counted(dataframe):
 
     ''' Expects Dataframe with columns "attribute", "count", "class" '''
@@ -132,14 +129,13 @@ def count_class_labels_counted(label_array, count_array):
             
     
 
+if __name__ == '__main__':
+    frame = pd.DataFrame({'age': [31,26,31,21,31,26,41,36,31,46,26], \
+            'department' : ['sales','sales','sales','systems','systems','systems','systems', 'marketing', 'marketing', 'secretary', 'secretary'], \
+            'salary': [46,26,31,46,66,46,66,46,41,36,26], \
+            'count': [30,40,40,20,5,3,3,10,4,4,6], \
+            'class':['senior', 'junior','junior','junior', 'senior','junior', 'senior','senior', 'junior','senior', 'junior']})
 
+    #print(info_a_counted(frame))
 
-frame = pd.DataFrame({'age': ['31','26','31','21','31','26','41','36','31','46','26'], \
-        'department' : ['sales','sales','sales','systems','systems','systems','systems', 'marketing', 'marketing', 'secretary', 'secretary'], \
-        'salary': [46,26,31,46,66,46,66,46,41,36,26], \
-        'count': [30,40,40,20,5,3,3,10,4,4,6], \
-        'class':['senior', 'junior','junior','junior', 'senior','junior', 'senior','senior', 'junior','senior', 'junior']})
-
-#print(info_a_counted(frame))
-
-print('Bestes Splitting Criterion: ', get_splitting_attribute_counted(frame))
+    print('Bestes Splitting Criterion: ', get_splitting_attribute_counted(frame))
